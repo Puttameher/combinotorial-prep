@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE357 — Exam Blast 🔒</title>
+  <!-- Modern Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=3.0">
+</head>
+<body>
+
+  <!-- Liquid Morphism Background Blobs -->
+  <div class="liquid-bg-container">
+    <div class="liquid-blob blob-1"></div>
+    <div class="liquid-blob blob-2"></div>
+    <div class="liquid-blob blob-3"></div>
+  </div>
+
+  <!-- STICKY NAVIGATION -->
+  <nav class="sticky-nav">
+    <div class="nav-logo">
+      <span>🔒</span> CSE357 Exam Blast
+    </div>
+    <div class="nav-links">
+      <a href="#hero" class="nav-tab active" data-target="hero-view">Dashboard</a>
+      <a href="#revision" class="nav-tab" data-target="revision-view">Revision Cards</a>
+      <a href="#quiz" class="nav-tab" data-target="quiz-view">MCQ Simulator</a>
+      <a href="#flashcards" class="nav-tab" data-target="flashcards-view">Flashcards</a>
+      <a href="#visualizer" class="nav-tab" data-target="visualizer-view">Sort Visualizer</a>
+      <a href="#cheatsheet" class="nav-tab" data-target="cheatsheet-view">Cheat Sheet</a>
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- 1. HERO VIEW (DASHBOARD) -->
+    <section id="hero-view" class="view-section active">
+      <div class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+          <div class="lock-icon">🔒</div>
+          <h1>CSE357 <span>Exam</span> Blast</h1>
+          <p class="subtitle">Every core concept, algorithmic complexity, database normalization rule, and networking standard cracked wide open. Complete your preparation in minutes.</p>
+          
+          <div class="timer-badge">
+            <span>⏰</span> Countdown: <span id="countdown-timer">36:00:00</span>
+          </div>
+
+          <div class="chapter-nav-grid">
+            <a href="#revision" class="chapter-nav-btn btn-os" onclick="navigateToTab('revision-view', 'os')">
+              <span class="num">Ch.01</span>
+              <span class="name">Operating Systems</span>
+              <span class="card-emoji">🖥️</span>
+            </a>
+            <a href="#revision" class="chapter-nav-btn btn-net" onclick="navigateToTab('revision-view', 'networks')">
+              <span class="num">Ch.02</span>
+              <span class="name">Computer Networks</span>
+              <span class="card-emoji">📡</span>
+            </a>
+            <a href="#revision" class="chapter-nav-btn btn-dbms" onclick="navigateToTab('revision-view', 'dbms')">
+              <span class="num">Ch.03</span>
+              <span class="name">DBMS</span>
+              <span class="card-emoji">🗄️</span>
+            </a>
+            <a href="#revision" class="chapter-nav-btn btn-oop" onclick="navigateToTab('revision-view', 'oop')">
+              <span class="num">Ch.04</span>
+              <span class="name">OOP Principles</span>
+              <span class="card-emoji">🧩</span>
+            </a>
+            <a href="#revision" class="chapter-nav-btn btn-ds" onclick="navigateToTab('revision-view', 'ds')">
+              <span class="num">Ch.05</span>
+              <span class="name">Data Structures</span>
+              <span class="card-emoji">🧱</span>
+            </a>
+            <a href="#revision" class="chapter-nav-btn btn-algo" onclick="navigateToTab('revision-view', 'algo')">
+              <span class="num">Ch.06</span>
+              <span class="name">Algorithms</span>
+              <span class="card-emoji">⚡</span>
+            </a>
+          </div>
+
+          <div class="topic-map" aria-label="Connected CSE357 topic map">
+            <svg class="topic-map-lines" viewBox="0 0 920 360" role="img" aria-hidden="true">
+              <path id="path-os" d="M460 180 C350 95 270 92 155 85" />
+              <path id="path-net" d="M460 180 C585 92 668 90 765 85" />
+              <path id="path-dbms" d="M460 180 C315 172 258 187 142 202" />
+              <path id="path-oop" d="M460 180 C608 172 667 188 782 202" />
+              <path id="path-ds" d="M460 180 C368 267 268 286 155 298" />
+              <path id="path-algo" d="M460 180 C552 267 652 286 765 298" />
+              <path class="topic-map-emphasis" d="M155 85 C326 43 595 43 765 85" />
+              <path class="topic-map-emphasis" d="M142 202 C312 253 605 253 782 202" />
+              <path class="topic-map-emphasis" d="M155 298 C350 330 570 330 765 298" />
+            </svg>
+            <div class="map-node map-core">
+              <span>Core</span>
+              <strong>System Thinking</strong>
+              <small>resources, state, data, complexity</small>
+            </div>
+            <button class="map-node node-os" onclick="navigateToTab('revision-view', 'os')"><span>01</span><strong>OS</strong><small>Processes + memory</small></button>
+            <button class="map-node node-net" onclick="navigateToTab('revision-view', 'networks')"><span>02</span><strong>Networks</strong><small>Layers + delivery</small></button>
+            <button class="map-node node-dbms" onclick="navigateToTab('revision-view', 'dbms')"><span>03</span><strong>DBMS</strong><small>Keys + transactions</small></button>
+            <button class="map-node node-oop" onclick="navigateToTab('revision-view', 'oop')"><span>04</span><strong>OOP</strong><small>Models + contracts</small></button>
+            <button class="map-node node-ds" onclick="navigateToTab('revision-view', 'ds')"><span>05</span><strong>DS</strong><small>Shape + access</small></button>
+            <button class="map-node node-algo" onclick="navigateToTab('revision-view', 'algo')"><span>06</span><strong>Algo</strong><small>Cost + strategy</small></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. REVISION VIEW -->
+    <section id="revision-view" class="view-section">
+      <!-- Search and Filter Bar -->
+      <div class="search-controls-bar">
+        <div class="search-input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-bar" placeholder="Search topics, key terms, or algorithms...">
+        </div>
+        <select id="chapter-filter" class="filter-select">
+          <option value="all">All Chapters</option>
+          <option value="os">Ch.01 Operating Systems</option>
+          <option value="networks">Ch.02 Computer Networks</option>
+          <option value="dbms">Ch.03 DBMS</option>
+          <option value="oop">Ch.04 OOP</option>
+          <option value="ds">Ch.05 Data Structures</option>
+          <option value="algo">Ch.06 Algorithms</option>
+        </select>
+      </div>
+
+      <!-- Revision Cards Container (Injected via JS) -->
+      <div id="revision-cards-container"></div>
+    </section>
+
+    <!-- 3. MCQ QUIZ VIEW -->
+    <section id="quiz-view" class="view-section">
+      <!-- Welcome Panel -->
+      <div id="quiz-welcome" class="quiz-welcome-panel">
+        <h3>🎯 Exam MCQ Simulator</h3>
+        <p>Test your knowledge on individual chapters or simulate a full exam with mixed questions.</p>
+        
+        <div class="quiz-selector-grid">
+          <button class="quiz-opt-btn active" data-scope="all">
+            <h4>🌐 Full Mixed Exam</h4>
+            <p>20 random questions from all CSE357 syllabus areas.</p>
+          </button>
+          <button class="quiz-opt-btn" data-scope="os">
+            <h4>🖥️ Chapter 1: Operating Systems</h4>
+            <p>Practice OS concepts, CPU scheduling, and memory managers.</p>
+          </button>
+          <button class="quiz-opt-btn" data-scope="networks">
+            <h4>📡 Chapter 2: Computer Networks</h4>
+            <p>Practice OSI/TCP layers, subnets, and routing protocols.</p>
+          </button>
+          <button class="quiz-opt-btn" data-scope="dbms">
+            <h4>🔑 Chapter 3: DBMS</h4>
+            <p>Practice SQL, transaction normalizations, and serializability.</p>
+          </button>
+          <button class="quiz-opt-btn" data-scope="oop">
+            <h4>🧱 Chapter 4: OOP</h4>
+            <p>Practice abstraction pillars, SOLID rules, and design patterns.</p>
+          </button>
+          <button class="quiz-opt-btn" data-scope="ds">
+            <h4>🌲 Chapter 5: Data Structures</h4>
+            <p>Practice tree balance, circular queues, heaps, and hashes.</p>
+          </button>
+          <button class="quiz-opt-btn" data-scope="algo">
+            <h4>📊 Chapter 6: Algorithms</h4>
+            <p>Practice sort complexities, Master Theorem, and P/NP bounds.</p>
+          </button>
+        </div>
+        
+        <button id="start-quiz-btn" class="action-btn">Start Simulator</button>
+      </div>
+
+      <!-- Active Quiz Workspace -->
+      <div id="quiz-workspace" class="quiz-workspace" style="display: none;">
+        <div class="quiz-header">
+          <div class="quiz-title-context" id="quiz-context-title">FULL MIXED EXAM</div>
+          <div class="quiz-timer">⏱️ Time: <span id="quiz-timer-clock">00:00</span></div>
+        </div>
+        <div class="quiz-progress-track">
+          <div id="quiz-progress-bar" class="quiz-progress-bar"></div>
+        </div>
+
+        <div class="quiz-question-card">
+          <div class="quiz-question-text" id="quiz-question-text">
+            Loading question text...
+          </div>
+          <div class="quiz-options-list" id="quiz-options-container">
+            <!-- Options dynamically injected -->
+          </div>
+          
+          <!-- Explanation box, hidden initially -->
+          <div class="quiz-explanation-box" id="quiz-explanation-container" style="display: none;">
+            <h5>Explanation</h5>
+            <p id="quiz-explanation-text">Explanation details...</p>
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <button id="quiz-next-btn" class="action-btn" disabled>Next Question</button>
+        </div>
+      </div>
+
+      <!-- Quiz Summary Panel -->
+      <div id="quiz-summary" class="quiz-summary-card" style="display: none;">
+        <h3>Exam Completed!</h3>
+        <div class="quiz-score-circle">
+          <span class="score-num" id="summary-score-percent">85%</span>
+          <span class="score-lbl">Score</span>
+        </div>
+        
+        <div class="quiz-summary-stats">
+          <div class="quiz-stat-item">
+            <div class="quiz-stat-val" id="summary-stat-correct">17 / 20</div>
+            <div class="quiz-stat-lbl">Correct Answers</div>
+          </div>
+          <div class="quiz-stat-item">
+            <div class="quiz-stat-val" id="summary-stat-time">04:32</div>
+            <div class="quiz-stat-lbl">Time Elapsed</div>
+          </div>
+        </div>
+
+        <button id="restart-quiz-btn" class="action-btn">Restart Simulator</button>
+      </div>
+    </section>
+
+    <!-- 4. FLASHCARDS VIEW -->
+    <section id="flashcards-view" class="view-section">
+      <div class="flashcards-workspace">
+        <div class="flashcard-header">
+          <div class="flashcard-progress-text">Card <span id="fc-current-index">1</span> of <span id="fc-total-count">42</span></div>
+          <select id="flashcard-chapter-filter" class="filter-select">
+            <option value="all">All Chapters</option>
+            <option value="os">OS</option>
+            <option value="networks">Networks</option>
+            <option value="dbms">DBMS</option>
+            <option value="oop">OOP</option>
+            <option value="ds">Data Structures</option>
+            <option value="algo">Algorithms</option>
+          </select>
+        </div>
+
+        <!-- Flip card layout -->
+        <div class="flashcard-container" id="flashcard-card">
+          <div class="flashcard-inner">
+            <div class="flashcard-face flashcard-front">
+              <span class="flashcard-category-badge" id="fc-chapter-badge">Operating Systems</span>
+              <div class="flashcard-term" id="fc-term-text">Term</div>
+              <span class="flashcard-hint-text">💡 Click to reveal definition</span>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <span class="flashcard-category-badge" id="fc-chapter-badge-back">Operating Systems</span>
+              <div class="flashcard-definition" id="fc-def-text">Definition details...</div>
+              <span class="flashcard-hint-text">💡 Click to flip back</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evaluation buttons -->
+        <div class="flashcard-controls">
+          <button class="fc-ctrl-btn btn-wrong-eval" id="fc-btn-wrong">❌ Still Learning</button>
+          <button class="fc-ctrl-btn btn-correct-eval" id="fc-btn-correct">✅ Got It</button>
+        </div>
+      </div>
+
+      <!-- Flashcard complete panel -->
+      <div id="flashcard-summary" class="flashcards-summary-panel" style="display: none;">
+        <h3>Deck Completed! 🎉</h3>
+        <p>Excellent progress. You've reviewed all cards in this selection.</p>
+        <div class="quiz-summary-stats" style="max-width: 400px; margin: 0 auto 2.5rem;">
+          <div class="quiz-stat-item">
+            <div class="quiz-stat-val" id="fc-stat-mastered">32</div>
+            <div class="quiz-stat-lbl">Mastered</div>
+          </div>
+          <div class="quiz-stat-item">
+            <div class="quiz-stat-val" id="fc-stat-reviewed">10</div>
+            <div class="quiz-stat-lbl">Need Review</div>
+          </div>
+        </div>
+        <button id="fc-restart-btn" class="action-btn">Reset Deck</button>
+      </div>
+    </section>
+
+    <!-- 5. SORTING VISUALIZER VIEW -->
+    <section id="visualizer-view" class="view-section">
+      <div class="visualizer-workspace">
+        <div class="visualizer-top-bar">
+          <div class="visualizer-title">
+            <h3>Algorithm Sorting Visualizer</h3>
+            <p>Trace sorting logic step-by-step to analyze runtime comparisons.</p>
+          </div>
+          <div class="visualizer-nav" id="visualizer-tabs-container">
+            <button class="visualizer-tab-btn active" data-algo="bubble">Bubble Sort</button>
+            <button class="visualizer-tab-btn" data-algo="selection">Selection Sort</button>
+            <button class="visualizer-tab-btn" data-algo="insertion">Insertion Sort</button>
+            <button class="visualizer-tab-btn" data-algo="quick">Quick Sort</button>
+            <button class="visualizer-tab-btn" data-algo="merge">Merge Sort</button>
+          </div>
+        </div>
+
+        <!-- Active Array Canvas -->
+        <div class="visualizer-canvas" id="visualizer-canvas">
+          <!-- Rendered dynamically by JS -->
+        </div>
+
+        <!-- Playback Actions -->
+        <div class="visualizer-controls-bar">
+          <div class="vis-btn-group">
+            <button class="vis-btn vis-btn-primary" id="vis-btn-start">▶ Sort Array</button>
+            <button class="vis-btn" id="vis-btn-step" disabled>⏭ Step</button>
+            <button class="vis-btn" id="vis-btn-reset">🔄 Reset</button>
+          </div>
+
+          <div class="vis-sliders-group">
+            <div class="vis-slider-container">
+              <label for="vis-size-slider">Array Size</label>
+              <input type="range" id="vis-size-slider" min="10" max="60" value="30">
+            </div>
+            <div class="vis-slider-container">
+              <label for="vis-speed-slider">Delay (ms)</label>
+              <input type="range" id="vis-speed-slider" min="5" max="300" value="100">
+            </div>
+          </div>
+        </div>
+
+        <!-- Trace Code Grid -->
+        <div class="vis-trace-panel">
+          <div class="vis-trace-code" id="vis-trace-code-box">
+            <!-- Selected algorithm pseudo-code trace injected here -->
+          </div>
+          <div class="vis-trace-desc">
+            <h4>Algorithm Analysis</h4>
+            <p id="vis-trace-description-text">Description...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CHEAT SHEET VIEW -->
+    <section id="cheatsheet-view" class="view-section">
+      <div class="cheatsheet-grid">
+        
+        <!-- Ports and Protocols -->
+        <div class="cheatsheet-section">
+          <h3>📡 Network Port Numbers</h3>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Port</th>
+                  <th>Protocol</th>
+                  <th>Default Service</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>20 / 21</strong></td><td>FTP</td><td>File Transfer (Data / Control)</td></tr>
+                <tr><td><strong>22</strong></td><td>SSH / SFTP</td><td>Secure Shell Login</td></tr>
+                <tr><td><strong>23</strong></td><td>Telnet</td><td>Cleartext Remote Terminal</td></tr>
+                <tr><td><strong>25</strong></td><td>SMTP</td><td>Mail Transfer Routing</td></tr>
+                <tr><td><strong>53</strong></td><td>DNS</td><td>Name-IP Resolution</td></tr>
+                <tr><td><strong>67 / 68</strong></td><td>DHCP</td><td>IP Lease Server / Client</td></tr>
+                <tr><td><strong>80</strong></td><td>HTTP</td><td>Web Server Cleartext</td></tr>
+                <tr><td><strong>110</strong></td><td>POP3</td><td>Mail Retrieval (removes from server)</td></tr>
+                <tr><td><strong>143</strong></td><td>IMAP</td><td>Mail Retrieval (syncs on server)</td></tr>
+                <tr><td><strong>443</strong></td><td>HTTPS</td><td>Web Server TLS Encrypted</td></tr>
+                <tr><td><strong>3389</strong></td><td>RDP</td><td>Remote Desktop Protocol</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Big O Complexities -->
+        <div class="cheatsheet-section">
+          <h3>📊 Algorithm Complexities</h3>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Structure / Algorithm</th>
+                  <th>Access / Search</th>
+                  <th>Insertion / Deletion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Array</strong></td><td>O(1) / O(N)</td><td>O(N) / O(N)</td></tr>
+                <tr><td><strong>Singly Linked List</strong></td><td>O(N) / O(N)</td><td>O(1) / O(1)</td></tr>
+                <tr><td><strong>Stack / Queue</strong></td><td>O(N) / O(N)</td><td>O(1) / O(1)</td></tr>
+                <tr><td><strong>Binary Search Tree (BST)</strong></td><td>O(log N) average / O(N) worst</td><td>O(log N) average / O(N) worst</td></tr>
+                <tr><td><strong>AVL Balanced Tree</strong></td><td>O(log N) always</td><td>O(log N) always</td></tr>
+                <tr><td><strong>Max/Min Heap</strong></td><td>O(1) max element / O(log N) search</td><td>O(log N) always</td></tr>
+                <tr><td><strong>Hash Table</strong></td><td>O(1) average / O(N) worst</td><td>O(1) average / O(N) worst</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Normalization Checklist -->
+        <div class="cheatsheet-section">
+          <h3>🔑 Normalization Checklist</h3>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Form</th>
+                  <th>Key Test Constraint</th>
+                  <th>Avoids</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>1NF</strong></td><td>Atomic attributes. No multi-values.</td><td>Repeating values</td></tr>
+                <tr><td><strong>2NF</strong></td><td>1NF + No partial dependencies (non-prime attributes depend on whole key).</td><td>Key subset redundancy</td></tr>
+                <tr><td><strong>3NF</strong></td><td>2NF + No transitive dependencies. For any X → Y, X is super key or Y is prime.</td><td>Non-key dependencies</td></tr>
+                <tr><td><strong>BCNF</strong></td><td>Stronger 3NF. For any non-trivial X → Y, X MUST be a super key.</td><td>Composite key redundancy</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Coffman Conditions -->
+        <div class="cheatsheet-section">
+          <h3>💀 Deadlock Coffman Conditions</h3>
+          <div class="example-box" style="margin-bottom: 0;" data-num="Cond">
+            <div class="ex-title">Deadlock occurs only if ALL four conditions hold:</div>
+            <div class="ex-body" style="font-size: 0.85rem; line-height: 1.6; color: var(--text);">
+              1. <strong>Mutual Exclusion:</strong> Resources cannot be shared.<br>
+              2. <strong>Hold and Wait:</strong> Processes hold resources while requesting others.<br>
+              3. <strong>No Preemption:</strong> Resources can only be released voluntarily.<br>
+              4. <strong>Circular Wait:</strong> Processes form a closed loop of dependency.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="good-luck">Crush CSE357! 🚀</div>
+      <p>&copy; 2026 Combinatorial Studies Prep Desk. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Javascript Modules -->
+  <script src="data.js?v=3.0"></script>
+  <script src="app.js?v=3.0"></script>
+</body>
+</html>
