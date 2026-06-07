@@ -2130,18 +2130,130 @@ button.map-node:hover {
   }
 }
 
+@media (max-width: 768px) {
+  .sticky-nav {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem !important;
+  }
+  
+  .nav-logo {
+    grid-column: 1;
+  }
+  
+  .theme-toggle-btn {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  .nav-links {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.35rem !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    white-space: nowrap;
+    padding-bottom: 0.4rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .nav-links a {
+    flex: 0 0 auto;
+    padding: 0.5rem 0.85rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .visualizer-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .visualizer-tab-btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
 @media (max-width: 640px) {
   .hero h1 {
-    font-size: 2.25rem;
+    font-size: 2.15rem;
   }
 
-  .chapter-nav-grid,
+  .chapter-nav-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem;
+  }
+
+  .chapter-nav-btn {
+    padding: 1rem 0.75rem !important;
+    min-height: 110px !important;
+  }
+
+  .chapter-nav-btn span.name {
+    font-size: 0.8rem !important;
+  }
+
+  .chapter-nav-btn .card-emoji {
+    font-size: 1.8rem !important;
+  }
+
   .topic-map {
     grid-template-columns: 1fr;
+    padding: 1rem;
   }
 
-  .topic-map {
+  .flashcard-face {
+    padding: 1.5rem !important;
+  }
+
+  .flashcard-term {
+    font-size: 1.4rem !important;
+  }
+
+  .flashcard-definition {
+    font-size: 0.95rem !important;
+  }
+
+  .diagram-box {
     padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .flow-node {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    min-width: 100px;
+  }
+
+  .flow-arrow {
+    font-size: 1rem;
+  }
+
+  .quiz-welcome-panel,
+  .quiz-question-card,
+  .quiz-summary-card,
+  .visualizer-workspace,
+  .cheatsheet-section {
+    padding: 1.25rem !important;
+  }
+
+  .quiz-question-text {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .quiz-option {
+    padding: 0.9rem 1.1rem;
   }
 
   .flashcard-controls,
@@ -2154,6 +2266,20 @@ button.map-node:hover {
   .vis-btn-group,
   .flashcard-controls {
     flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .vis-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .vis-sliders-group {
+    justify-content: space-between;
+  }
+
+  .vis-slider-container input[type="range"] {
+    width: 100px;
   }
 }
 
