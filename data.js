@@ -661,29 +661,129 @@ const CURRICULUM = {
     },
     {
       id: "oop",
-      name: "OOP",
+      name: "OOP & PL Fundamentals",
       num: "Ch 04",
       theme: "theme-oop",
       topics: [
         {
-          title: "Four Pillars of OOP",
+          title: "C/C++/Java & PL Fundamentals",
+          icon: "💻",
+          desc: "Compilation vs interpretation models, pointer variables, storage behaviors, and core runtime execution differences.",
+          keyPoints: ["Compilation vs Interpretation", "Pointers vs References", "C++ vs Java", "Bytecode & JVM", "JIT Compiler"],
+          htmlContent: `
+            <p>Programming languages differ in how source code is translated and executed by physical CPUs or virtual machines.</p>
+            
+            <div class="compare-grid">
+              <div class="compare-card">
+                <h4 style="color:var(--accent4)">Compilers (C / C++)</h4>
+                <ul>
+                  <li>Translates entire source code into native machine code at once.</li>
+                  <li>Produces highly optimized, fast executables.</li>
+                  <li>No runtime translation overhead. Platform-dependent binaries.</li>
+                </ul>
+              </div>
+              <div class="compare-card">
+                <h4 style="color:var(--accent2)">Interpreters (Python / JS)</h4>
+                <ul>
+                  <li>Translates and executes code line-by-line during runtime.</li>
+                  <li>Slower execution due to interpretation overhead.</li>
+                  <li>Highly portable; runs anywhere with a compatible interpreter.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="examples-container">
+              <div class="example-box" data-num="Java">
+                <div class="ex-title">Java Hybrid Model (Bytecode + JVM + JIT)</div>
+                <div class="ex-body">
+                  Java sources are compiled into platform-independent <strong>Bytecode</strong> (.class files). The Java Virtual Machine (JVM) interprets this bytecode. To boost performance, the <strong>Just-In-Time (JIT) Compiler</strong> compiles frequently executed hot code paths into native machine code dynamically.
+                </div>
+              </div>
+              <div class="example-box" data-num="Ref">
+                <div class="ex-title">Pointers vs References</div>
+                <div class="ex-body">
+                  <strong>Pointer:</strong> A variable that stores the memory address of another variable (allows direct manipulation and pointer arithmetic; can be NULL).<br>
+                  <strong>Reference:</strong> An alias or alternative name for an existing variable (shares same address, must be initialized when created, cannot be NULL or reassigned).
+                </div>
+              </div>
+            </div>
+          `
+        },
+        {
+          title: "Pointers, Storage & Memory Handling",
+          icon: "🧠",
+          desc: "Controlling variable lifetime via storage classes, dynamic stack/heap allocation, and memory safety patterns.",
+          keyPoints: ["Storage Classes", "Stack vs Heap Allocation", "Memory Leaks", "Dangling Pointers", "Garbage Collection"],
+          htmlContent: `
+            <div class="compare-grid">
+              <div class="compare-card">
+                <h4 style="color:var(--accent1)">Stack Allocation</h4>
+                <ul>
+                  <li>Used for local variables and function execution call frames.</li>
+                  <li>Managed automatically by the CPU. Very fast allocation/deallocation.</li>
+                  <li>Fixed, limited size (can cause Stack Overflow if exceeded).</li>
+                </ul>
+              </div>
+              <div class="compare-card">
+                <h4 style="color:var(--accent3)">Heap Allocation</h4>
+                <ul>
+                  <li>Used for dynamic, variable-sized structures allocated at runtime.</li>
+                  <li>Managed manually (C/C++) or automatically via Garbage Collection (Java).</li>
+                  <li>Slower allocation/deallocation; can suffer from fragmentation.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <div class="diagram-title" style="margin: 0.5rem 1rem;">C/C++ Storage Classes Overview</div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Storage Class</th>
+                    <th>Memory Location</th>
+                    <th>Lifetime</th>
+                    <th>Scope / Visibility</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>auto</code> (default local)</td><td>Stack</td><td>Function execution block</td><td>Local to enclosing block</td></tr>
+                  <tr><td><code>register</code></td><td>CPU Register</td><td>Function execution block</td><td>Local to enclosing block</td></tr>
+                  <tr><td><code>static</code></td><td>Data Segment</td><td>Program lifetime</td><td>Local to block / file scope</td></tr>
+                  <tr><td><code>extern</code></td><td>Data Segment</td><td>Program lifetime</td><td>Global (accessible across files)</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="examples-container">
+              <div class="example-box" data-num="Danger">
+                <div class="ex-title">Memory Anomalies</div>
+                <div class="ex-body">
+                  <strong>Memory Leak:</strong> Occurs when dynamically allocated heap memory (via <code>malloc</code> or <code>new</code>) is no longer needed but is not released back to the OS, exhausting system resources.<br>
+                  <strong>Dangling Pointer:</strong> A pointer pointing to a memory location that has already been deallocated or freed, leading to undefined behavior if dereferenced.
+                </div>
+              </div>
+            </div>
+          `
+        },
+        {
+          title: "Introduction to OOP & Classes",
           icon: "🧱",
-          desc: "Object-Oriented Programming relies on four foundational principles for software modularity.",
-          keyPoints: ["Abstraction", "Encapsulation", "Inheritance", "Polymorphism", "Virtual Functions"],
+          desc: "Designing software blueprints using classes and objects. Enforcing structure via the four main object-oriented pillars.",
+          keyPoints: ["Encapsulation", "Abstraction", "Inheritance", "Polymorphism", "Virtual Functions", "Vtables & Vptrs"],
           htmlContent: `
             <div class="compare-grid">
               <div class="compare-card">
                 <h4 style="color:var(--accent4)">Encapsulation</h4>
                 <ul>
-                  <li>Binds data (variables) and behavior (methods) into a single object class unit.</li>
-                  <li>Hides internal states using private variables and exposes access through public interfaces.</li>
+                  <li>Groups data (attributes) and methods (behavior) together into a single unit (class).</li>
+                  <li>Hides internal states using access modifiers (<code>private</code>, <code>protected</code>) to restrict direct external access.</li>
                 </ul>
               </div>
               <div class="compare-card">
                 <h4 style="color:var(--accent2)">Abstraction</h4>
                 <ul>
-                  <li>Exposes only essential functionalities while hiding complex implementation details.</li>
-                  <li>Implemented via interfaces and abstract classes.</li>
+                  <li>Hides complex implementation details and exposes only essential features to the outside world.</li>
+                  <li>Achieved using abstract classes and interfaces in languages like C++ and Java.</li>
                 </ul>
               </div>
             </div>
@@ -692,100 +792,51 @@ const CURRICULUM = {
               <div class="compare-card">
                 <h4 style="color:var(--accent3)">Inheritance</h4>
                 <ul>
-                  <li>Allows a child class to inherit fields and methods from a parent class (IS-A relationship).</li>
-                  <li>Supports code reuse. Can lead to the <strong>Diamond Problem</strong> in multiple inheritance, resolved via interface rules.</li>
+                  <li>Allows a child class to inherit traits from a parent class, facilitating code reuse.</li>
+                  <li>Can lead to the <strong>Diamond Problem</strong> in multiple inheritance, resolved in Java using interfaces.</li>
                 </ul>
               </div>
               <div class="compare-card">
                 <h4 style="color:var(--accent6)">Polymorphism</h4>
                 <ul>
-                  <li>"Many forms." Code operates differently depending on object types.</li>
-                  <li><strong>Compile-time:</strong> Method and operator overloading.</li>
-                  <li><strong>Runtime:</strong> Method overriding (uses <strong>vtable / virtual functions</strong>).</li>
+                  <li>Ability to take multiple forms.</li>
+                  <li><strong>Compile-time:</strong> Method/operator overloading.</li>
+                  <li><strong>Runtime:</strong> Method overriding. Accomplished via <strong>Virtual Function Tables (vtables)</strong> and virtual pointers (vptrs).</li>
                 </ul>
               </div>
-            </div>
-
-            <div class="code-box">
-              <div class="formula-label">Runtime Polymorphism C++ Example</div>
-<pre><code><span class="kw">class</span> <span class="fn">Animal</span> {
-<span class="kw">public</span>:
-    <span class="kw">virtual void</span> <span class="fn">makeSound</span>() { std::cout << <span class="str">"Generic sound"</span>; }
-};
-<span class="kw">class</span> <span class="fn">Dog</span> : <span class="kw">public</span> <span class="fn">Animal</span> {
-<span class="kw">public</span>:
-    <span class="kw">void</span> <span class="fn">makeSound</span>() <span class="kw">override</span> { std::cout << <span class="str">"Woof!"</span>; }
-};</code></pre>
             </div>
           `
         },
         {
-          title: "SOLID Design Principles",
-          icon: "💎",
-          desc: "Five software design guidelines that enhance code maintainability and scalability.",
-          keyPoints: ["Single Responsibility", "Open/Closed", "Liskov Substitution", "Interface Segregation", "Dependency Inversion"],
+          title: "Parameter Passing & Binding Techniques",
+          icon: "🔄",
+          desc: "Passing variables to functions and binding identifiers to types or memory addresses.",
+          keyPoints: ["Pass by Value", "Pass by Reference", "Pass by Pointer", "Static Binding", "Dynamic Binding"],
           htmlContent: `
+            <div class="compare-grid">
+              <div class="compare-card">
+                <h4 style="color:var(--accent2)">Pass by Value</h4>
+                <ul>
+                  <li>Copies actual argument value into formal parameter.</li>
+                  <li>Modifications inside the function do not affect original caller variables.</li>
+                </ul>
+              </div>
+              <div class="compare-card">
+                <h4 style="color:var(--accent3)">Pass by Reference / Pointer</h4>
+                <ul>
+                  <li>Passes a reference or memory address of the argument variable.</li>
+                  <li>Modifications inside the function directly alter the original caller's data.</li>
+                </ul>
+              </div>
+            </div>
+
             <div class="examples-container">
-              <div class="example-box" data-num="S">
-                <div class="ex-title">S — Single Responsibility Principle (SRP)</div>
-                <div class="ex-body">A class should have one, and only one, reason to change. It should focus exclusively on a single duty.</div>
-              </div>
-              <div class="example-box" data-num="O">
-                <div class="ex-title">O — Open/Closed Principle (OCP)</div>
-                <div class="ex-body">Software entities should be open for extension, but closed for modification. Implement new features by adding subclass overrides instead of editing base code.</div>
-              </div>
-              <div class="example-box" data-num="L">
-                <div class="ex-title">L — Liskov Substitution Principle (LSP)</div>
-                <div class="ex-body">Subtypes must be substitutable for their base types without altering system correctness. Subclasses should not weaken preconditions or strengthen postconditions.</div>
-              </div>
-              <div class="example-box" data-num="I">
-                <div class="ex-title">I — Interface Segregation Principle (ISP)</div>
-                <div class="ex-body">Clients should not be forced to depend on interfaces they do not use. Prefer multiple, small, specific interfaces over a single, generic one.</div>
-              </div>
-              <div class="example-box" data-num="D">
-                <div class="ex-title">D — Dependency Inversion Principle (DIP)</div>
-                <div class="ex-body">High-level modules should not depend on low-level modules. Both should depend on abstractions (interfaces). Abstractions should not depend on details; details should depend on abstractions.</div>
-              </div>
-            </div>
-          `
-        },
-        {
-          title: "Key Design Patterns",
-          icon: "🎨",
-          desc: "Reusable solutions to common software design problems.",
-          keyPoints: ["Singleton", "Factory", "Observer", "Strategy", "Creational", "Behavioral"],
-          htmlContent: `
-            <div class="compare-grid">
-              <div class="compare-card">
-                <h4 style="color:var(--accent4)">Singleton Pattern (Creational)</h4>
-                <ul>
-                  <li>Guarantees a class has only one instance and provides a global access point to it.</li>
-                  <li>Uses a private constructor, a private static instance variable, and a public static getter method.</li>
-                </ul>
-              </div>
-              <div class="compare-card">
-                <h4 style="color:var(--accent2)">Factory Method Pattern (Creational)</h4>
-                <ul>
-                  <li>Defines an interface for creating objects, but lets subclasses decide which class to instantiate.</li>
-                  <li>Decouples client code from concrete object creation classes.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="compare-grid">
-              <div class="compare-card">
-                <h4 style="color:var(--accent3)">Observer Pattern (Behavioral)</h4>
-                <ul>
-                  <li>Defines a one-to-many dependency between objects.</li>
-                  <li>When the state of the subject changes, all its dependents (observers) are notified and updated automatically.</li>
-                </ul>
-              </div>
-              <div class="compare-card">
-                <h4 style="color:var(--accent6)">Strategy Pattern (Behavioral)</h4>
-                <ul>
-                  <li>Defines a family of algorithms, encapsulates each one, and makes them interchangeable at runtime.</li>
-                  <li>Allows algorithms to vary independently from clients that use them.</li>
-                </ul>
+              <div class="example-box" data-num="Bind">
+                <div class="ex-title">Static vs Dynamic Binding</div>
+                <div class="ex-body">
+                  <strong>Static Binding (Early):</strong> Association of function calls to definitions occurs at compile-time (e.g., overloaded methods, final/static functions). Highly efficient.<br>
+                  <strong>Dynamic Binding (Late):</strong> Association occurs at runtime based on the actual object type (e.g., overridden virtual methods). Enables polymorphism.
+                </div>
               </div>
             </div>
           `
@@ -799,106 +850,140 @@ const CURRICULUM = {
       theme: "theme-ds",
       topics: [
         {
-          title: "Linear Data Structures: Lists, Stacks, Queues",
-          icon: "📈",
-          desc: "Sequential data structures store elements in a linear sequence, differing in access and allocation properties.",
-          keyPoints: ["Linked List", "Stack", "Queue", "LIFO / FIFO", "Circular Queue"],
+          title: "Introduction to DS & Linear Structures",
+          icon: "🧱",
+          desc: "Primitive vs non-primitive and linear vs non-linear data structures. Stacks, queues, and linked lists operations and applications.",
+          keyPoints: ["Singly Linked List", "Doubly Linked List", "Stacks & Queues", "Circular Queue", "LIFO vs FIFO"],
           htmlContent: `
+            <p>Linear data structures store elements in a sequential order, where each element is connected to its previous and next adjacent elements.</p>
+
             <div class="compare-grid">
               <div class="compare-card">
                 <h4 style="color:var(--accent5)">Stack (LIFO)</h4>
                 <ul>
                   <li>Last-In, First-Out access order.</li>
-                  <li>Core operations: <code>push()</code> and <code>pop()</code> execute in <code>O(1)</code> time.</li>
-                  <li><strong>Applications:</strong> Expression evaluation (Infix to Postfix), recursion trace, matching parentheses, undo/redo buffers.</li>
+                  <li>Operations: <code>push()</code> and <code>pop()</code> run in <code>O(1)</code>.</li>
+                  <li><strong>Applications:</strong> Recursion tracing, undo buffers, parentheses matching, expression parsing (Infix to Postfix).</li>
                 </ul>
               </div>
               <div class="compare-card">
                 <h4 style="color:var(--accent2)">Queue (FIFO)</h4>
                 <ul>
                   <li>First-In, First-Out access order.</li>
-                  <li>Core operations: <code>enqueue()</code> and <code>dequeue()</code> execute in <code>O(1)</code> time.</li>
-                  <li><strong>Applications:</strong> Process scheduling, print spoolers, Breadth-First Search (BFS) queue.</li>
+                  <li>Operations: <code>enqueue()</code> and <code>dequeue()</code> run in <code>O(1)</code>.</li>
+                  <li><strong>Applications:</strong> Operating system CPU scheduling, print spoolers, BFS graph traversal queue.</li>
                 </ul>
               </div>
             </div>
 
-            <div class="code-box">
-              <div class="formula-label">Algorithm: Singly Linked List Reversal (Iterative)</div>
-<pre><code><span class="kw">Node*</span> <span class="fn">reverseList</span>(<span class="kw">Node*</span> head) {
-    <span class="kw">Node*</span> prev = <span class="kw">nullptr</span>;
-    <span class="kw">Node*</span> curr = head;
-    <span class="kw">Node*</span> next = <span class="kw">nullptr</span>;
-    <span class="kw">while</span> (curr != <span class="kw">nullptr</span>) {
-        next = curr->next;  <span class="cm">// Store next node</span>
-        curr->next = prev;  <span class="cm">// Reverse pointer direction</span>
-        prev = curr;        <span class="cm">// Move pointers forward</span>
-        curr = next;
-    }
-    <span class="kw">return</span> prev;
-}</code></pre>
+            <div class="examples-container">
+              <div class="example-box" data-num="Circular">
+                <div class="ex-title">Circular Queue</div>
+                <div class="ex-body">
+                  A linear queue implemented in an array where the last position connects back to the first. Prevents memory waste of standard queues by recycling empty cells vacated during dequeues.
+                </div>
+              </div>
+              <div class="example-box" data-num="Lists">
+                <div class="ex-title">Linked List Varieties</div>
+                <div class="ex-body">
+                  <strong>Singly Linked List:</strong> Each node points to the next node. O(N) access traversal time.<br>
+                  <strong>Doubly Linked List:</strong> Nodes point to both next and previous nodes, facilitating bidirectional traversal.<br>
+                  <strong>Circular Linked List:</strong> The last node points back to the first node (head), forming an endless loop.
+                </div>
+              </div>
             </div>
           `
         },
         {
-          title: "Balanced Trees (AVL & Red-Black Trees)",
+          title: "Trees, Binary Trees & Balanced Search Trees",
           icon: "🌲",
-          desc: "Self-balancing binary search trees guarantee optimal O(log N) lookup, insertion, and deletion times.",
-          keyPoints: ["AVL Tree", "Balance Factor", "Red-Black Tree", "Rotations", "Height Bounds"],
+          desc: "Hierarchical trees, traversal strategies, and self-balancing binary search trees for guaranteed logarithmic operations.",
+          keyPoints: ["Binary Search Tree", "AVL Tree", "Red-Black Tree", "Tree Rotations", "Pre/In/Postorder"],
           htmlContent: `
             <div class="compare-grid">
               <div class="compare-card">
                 <h4 style="color:var(--accent5)">AVL Tree</h4>
                 <ul>
-                  <li>Strictly height-balanced BST.</li>
-                  <li><strong>Balance Factor (BF):</strong> <code>Height(Left_Subtree) - Height(Right_Subtree)</code>. Must be in <code>{-1, 0, 1}</code>.</li>
-                  <li>Violations are corrected via single (LL, RR) or double (LR, RL) rotations.</li>
-                  <li>Faster search operations than RB-Trees because they are more strictly balanced.</li>
+                  <li>Strictly height-balanced Binary Search Tree.</li>
+                  <li><strong>Balance Factor (BF):</strong> Height(Left) - Height(Right). Must be inside <code>{-1, 0, 1}</code>.</li>
+                  <li>Restores balance using single (LL, RR) or double (LR, RL) rotations.</li>
                 </ul>
               </div>
               <div class="compare-card">
                 <h4 style="color:var(--accent6)">Red-Black Tree</h4>
                 <ul>
-                  <li>Self-balancing BST using node coloring (Red/Black).</li>
-                  <li><strong>Properties:</strong>
-                    1. Every node is Red or Black.<br>
-                    2. The root is always Black.<br>
-                    3. Red nodes cannot have Red children (no adjacent red nodes).<br>
-                    4. Every path from root to leaf must contain the same number of Black nodes.
-                  </li>
-                  <li>Allows slightly looser balance, requiring fewer rotations during insertion/deletion.</li>
+                  <li>Self-balancing BST using node coloring rules (Red/Black).</li>
+                  <li>Root is always Black. Red nodes cannot have Red children. Every path has equal black node counts.</li>
+                  <li>Slightly looser balance than AVL trees, requiring fewer rotations during insertions.</li>
                 </ul>
               </div>
             </div>
 
-            <div class="hint-badge">💡 Height Bounds: AVL Tree height is bounded by &approx; 1.44 log N. Red-Black Tree height is bounded by &approx; 2 log N.</div>
+            <div class="formula-box">
+              <div class="formula-label">Binary Tree traversal order patterns</div>
+              <strong>Preorder:</strong> Visit Root &rarr; Left Subtree &rarr; Right Subtree<br>
+              <strong>Inorder:</strong> Visit Left Subtree &rarr; Root &rarr; Right Subtree <em>(Outputs sorted keys in a BST)</em><br>
+              <strong>Postorder:</strong> Visit Left Subtree &rarr; Right Subtree &rarr; Root
+            </div>
           `
         },
         {
-          title: "Heaps & Hash Tables",
-          icon: "🔑",
-          desc: "Heaps manage priority queues; Hash Tables provide O(1) average key-value lookups.",
-          keyPoints: ["Min/Max Heap", "Heapify", "Collision Resolution", "Linear Probing", "Chaining"],
+          title: "Graphs & Representation Algorithms",
+          icon: "🕸️",
+          desc: "Representing graphs using adjacency matrices and lists. Traversing networks to map node connections.",
+          keyPoints: ["Adjacency Matrix", "Adjacency List", "Breadth-First Search (BFS)", "Depth-First Search (DFS)", "Cycle Detection"],
           htmlContent: `
             <div class="compare-grid">
               <div class="compare-card">
-                <h4 style="color:var(--accent5)">Max-Heap / Min-Heap</h4>
+                <h4 style="color:var(--accent2)">Adjacency Matrix</h4>
                 <ul>
-                  <li>Complete binary tree representation.</li>
-                  <li><strong>Max-Heap:</strong> Parent value &ge; children values. Root contains maximum element.</li>
-                  <li><strong>Complexity:</strong> Get Min/Max <code>O(1)</code>; Insert/Delete <code>O(log N)</code>.</li>
-                  <li><strong>Heapify:</strong> Sub-routine that constructs a heap from an unsorted array in-place in <code>O(N)</code> time.</li>
+                  <li>V &times; V boolean grid where matrix[i][j] = 1 represents an edge between i and j.</li>
+                  <li><strong>Pros:</strong> O(1) query check if edge exists.</li>
+                  <li><strong>Cons:</strong> High space complexity of <code>O(V<sup>2</sup>)</code>.</li>
                 </ul>
               </div>
               <div class="compare-card">
+                <h4 style="color:var(--accent3)">Adjacency List</h4>
+                <ul>
+                  <li>An array of linked lists where list[i] contains all neighboring vertices of vertex i.</li>
+                  <li><strong>Pros:</strong> Space-efficient <code>O(V + E)</code>.</li>
+                  <li><strong>Cons:</strong> Slower O(V) check to verify if a specific edge exists.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="examples-container">
+              <div class="example-box" data-num="BFS">
+                <div class="ex-title">Breadth-First Search (BFS)</div>
+                <div class="ex-body">Explores vertices level-by-level, expanding outwards to neighbors. Uses a <strong>FIFO Queue</strong>. Solves shortest path problems on unweighted graphs.</div>
+              </div>
+              <div class="example-box" data-num="DFS">
+                <div class="ex-title">Depth-First Search (DFS)</div>
+                <div class="ex-body">Explores as deep as possible along each branch before backtracking. Uses a <strong>LIFO Stack</strong> or recursion. Applied in cycle detection and topological sorting.</div>
+              </div>
+            </div>
+          `
+        },
+        {
+          title: "Hashing & Heaps (Applications & Operations)",
+          icon: "🔑",
+          desc: "Key-value lookups, hash collision resolution methods, heap structures, and priority queues.",
+          keyPoints: ["Separate Chaining", "Linear Probing", "Hash Functions", "Max/Min Heap", "Heapify", "Priority Queue"],
+          htmlContent: `
+            <div class="compare-grid">
+              <div class="compare-card">
                 <h4 style="color:var(--accent3)">Hash Table Collision Resolution</h4>
                 <ul>
-                  <li><strong>Separate Chaining:</strong> Array slots point to a linked list of records sharing the same hash index.</li>
-                  <li><strong>Open Addressing:</strong> Search slots sequentially.
-                    - <em>Linear Probing:</em> check sequentially (causes primary clustering).<br>
-                    - <em>Quadratic Probing:</em> offset checks quadratically.<br>
-                    - <em>Double Hashing:</em> uses a second hash function to calculate interval steps.
-                  </li>
+                  <li><strong>Separate Chaining:</strong> Array slots link to linked lists of items containing identical hash keys.</li>
+                  <li><strong>Open Addressing (Linear Probing):</strong> Inspect consecutive array indexes sequentially when collision occurs. Can cause primary clustering.</li>
+                </ul>
+              </div>
+              <div class="compare-card">
+                <h4 style="color:var(--accent5)">Heaps (Priority Queues)</h4>
+                <ul>
+                  <li>Complete binary tree. Max-Heap holds parent &ge; child values; Min-Heap holds parent &le; child values.</li>
+                  <li>Get root element: <code>O(1)</code>. Insert/Delete: <code>O(log N)</code>.</li>
+                  <li><strong>Heapify:</strong> Linear time <code>O(N)</code> bottom-up construction algorithm.</li>
                 </ul>
               </div>
             </div>
@@ -913,39 +998,48 @@ const CURRICULUM = {
       theme: "theme-algo",
       topics: [
         {
-          title: "Asymptotic Complexity & Recurrences",
+          title: "Asymptotic Complexity & Running Time Analysis",
           icon: "📊",
-          desc: "Analyzes resource utilization of algorithms. Solves recurrence relations to determine asymptotic bounds.",
-          keyPoints: ["Big-O / Omega / Theta", "Master Theorem", "Recurrence", "Space Complexity"],
+          desc: "Evaluating algorithm performance, rate of growth behaviors, and asymptotic notations.",
+          keyPoints: ["Asymptotic Notation", "Big-O Notation", "Big-Omega Notation", "Big-Theta Notation", "Rate of Growth"],
           htmlContent: `
             <div class="compare-grid">
               <div class="compare-card">
                 <h4 style="color:var(--accent6)">Asymptotic Notations</h4>
                 <ul>
-                  <li><strong>Big-O (O):</strong> Asymptotic upper bound. Defines worst-case growth.</li>
-                  <li><strong>Big-Omega (&Omega;):</strong> Asymptotic lower bound. Defines best-case growth.</li>
-                  <li><strong>Big-Theta (&Theta;):</strong> Asymptotic tight bound. Describes exact growth rate.</li>
+                  <li><strong>Big-O (O):</strong> Describes the asymptotic upper bound. Represents worst-case running time.</li>
+                  <li><strong>Big-Omega (&Omega;):</strong> Describes the asymptotic lower bound. Represents best-case running time.</li>
+                  <li><strong>Big-Theta (&Theta;):</strong> Describes the asymptotic tight bound. Represents average-case running time.</li>
                 </ul>
               </div>
               <div class="compare-card">
-                <h4 style="color:var(--accent2)">Master Theorem for Divide & Conquer</h4>
-                <p style="font-size:0.82rem; line-height:1.5;">For recurrences of the form: <code>T(n) = aT(n/b) + f(n)</code>, compare <code>f(n)</code> with <code>n<sup>log<sub>b</sub>(a)</sup></code>:</p>
-                <ul style="margin-top:0.5rem; font-size:0.8rem;">
-                  <li><strong>Case 1:</strong> If <code>f(n) = O(n<sup>log<sub>b</sub>(a) - &epsilon;</sup>)</code> &rArr; <code>T(n) = &Theta;(n<sup>log<sub>b</sub>(a)</sup>)</code></li>
-                  <li><strong>Case 2:</strong> If <code>f(n) = &Theta;(n<sup>log<sub>b</sub>(a)</sup>)</code> &rArr; <code>T(n) = &Theta;(n<sup>log<sub>b</sub>(a)</sup> log n)</code></li>
-                  <li><strong>Case 3:</strong> If <code>f(n) = &Omega;(n<sup>log<sub>b</sub>(a) + &epsilon;</sup>)</code> &rArr; <code>T(n) = &Theta;(f(n))</code></li>
-                </ul>
+                <h4 style="color:var(--accent2)">Rate of Growth Ranking</h4>
+                <p style="font-size:0.82rem; line-height:1.5;">Ordering of common growth functions from fastest-running to slowest:</p>
+                <div style="font-family:'JetBrains Mono',monospace; font-size:0.8rem; margin-top:0.4rem; color:var(--accent1);">
+                  O(1) &lt; O(log N) &lt; O(N) &lt; O(N log N) &lt; O(N<sup>2</sup>) &lt; O(2<sup>N</sup>) &lt; O(N!)
+                </div>
               </div>
             </div>
-
+          `
+        },
+        {
+          title: "Recursion & Backtracking Strategies",
+          icon: "🔄",
+          desc: "Solving nested subproblems via functions calling themselves and using backtracking for state-space explorations.",
+          keyPoints: ["Recursion", "Base Case", "Call Stack", "Backtracking", "State Space Tree", "N-Queens"],
+          htmlContent: `
             <div class="examples-container">
-              <div class="example-box" data-num="Ex 1">
-                <div class="ex-title">Merge Sort Recurrence</div>
-                <div class="ex-body"><code>T(n) = 2T(n/2) + O(n)</code>. Here, <code>a=2</code>, <code>b=2</code>, <code>f(n)=n</code>. <code>n<sup>log<sub>2</sub>(2)</sup> = n</code>. Matches Case 2. Solution: <code>T(n) = &Theta;(n log n)</code>.</div>
+              <div class="example-box" data-num="Rec">
+                <div class="ex-title">Recursion Anatomy</div>
+                <div class="ex-body">
+                  Recursion splits a large task into smaller instances. Every recursive function must define a <strong>Base Case</strong> to terminate recursion and prevent stack overflow by stopping additional call stack frames.
+                </div>
               </div>
-              <div class="example-box" data-num="Ex 2">
-                <div class="ex-title">Binary Search Recurrence</div>
-                <div class="ex-body"><code>T(n) = T(n/2) + O(1)</code>. Here, <code>a=1</code>, <code>b=2</code>, <code>f(n)=1</code>. <code>n<sup>log<sub>2</sub>(1)</sup> = 1</code>. Matches Case 2. Solution: <code>T(n) = &Theta;(log n)</code>.</div>
+              <div class="example-box" data-num="Back">
+                <div class="ex-title">Backtracking Strategy</div>
+                <div class="ex-body">
+                  A refined brute-force search that explores candidates using a state-space tree. It immediately prunes branches as soon as a partial candidate violates constraints. <strong>Examples:</strong> N-Queens, Sudoku, Hamiltonian path search.
+                </div>
               </div>
             </div>
           `
@@ -953,8 +1047,8 @@ const CURRICULUM = {
         {
           title: "Sorting & Searching Algorithms",
           icon: "🔃",
-          desc: "Rearranges arrays of elements and searches sorted data sets efficiently.",
-          keyPoints: ["Merge Sort", "Quick Sort", "Heap Sort", "Binary Search", "Time Complexities"],
+          desc: "Code complexities, array sorting algorithms, and search paradigms.",
+          keyPoints: ["Merge Sort", "Quick Sort", "Heap Sort", "Insertion Sort", "Binary Search"],
           htmlContent: `
             <div class="table-wrapper">
               <table class="data-table">
@@ -965,122 +1059,40 @@ const CURRICULUM = {
                     <th>Average Case</th>
                     <th>Worst Case</th>
                     <th>Space Complexity</th>
-                    <th>Stability</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><strong>Insertion Sort</strong></td>
-                    <td class="c-green">O(N)</td>
-                    <td class="c-red">O(N<sup>2</sup>)</td>
-                    <td class="c-red">O(N<sup>2</sup>)</td>
-                    <td class="c-green">O(1)</td>
-                    <td>Stable</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Merge Sort</strong></td>
-                    <td class="c-orange">O(N log N)</td>
-                    <td class="c-orange">O(N log N)</td>
-                    <td class="c-orange">O(N log N)</td>
-                    <td class="c-orange">O(N)</td>
-                    <td>Stable</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Quick Sort</strong></td>
-                    <td class="c-orange">O(N log N)</td>
-                    <td class="c-orange">O(N log N)</td>
-                    <td class="c-red">O(N<sup>2</sup>)</td>
-                    <td class="c-green">O(log N)</td>
-                    <td>Unstable</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Heap Sort</strong></td>
-                    <td class="c-orange">O(N log N)</td>
-                    <td class="c-orange">O(N log N)</td>
-                    <td class="c-orange">O(N log N)</td>
-                    <td class="c-green">O(1)</td>
-                    <td>Unstable</td>
-                  </tr>
+                  <tr><td><strong>Insertion Sort</strong></td><td class="c-green">O(N)</td><td class="c-red">O(N<sup>2</sup>)</td><td class="c-red">O(N<sup>2</sup>)</td><td class="c-green">O(1)</td></tr>
+                  <tr><td><strong>Merge Sort</strong></td><td class="c-orange">O(N log N)</td><td class="c-orange">O(N log N)</td><td class="c-orange">O(N log N)</td><td class="c-orange">O(N)</td></tr>
+                  <tr><td><strong>Quick Sort</strong></td><td class="c-orange">O(N log N)</td><td class="c-orange">O(N log N)</td><td class="c-red">O(N<sup>2</sup>)</td><td class="c-green">O(log N)</td></tr>
+                  <tr><td><strong>Heap Sort</strong></td><td class="c-orange">O(N log N)</td><td class="c-orange">O(N log N)</td><td class="c-orange">O(N log N)</td><td class="c-green">O(1)</td></tr>
+                  <tr><td><strong>Binary Search</strong></td><td class="c-green">O(1)</td><td class="c-orange">O(log N)</td><td class="c-orange">O(log N)</td><td class="c-green">O(1)</td></tr>
                 </tbody>
               </table>
-            </div>
-
-            <div class="examples-container">
-              <div class="example-box" data-num="Pivot">
-                <div class="ex-title">Quick Sort Worst Case Trigger</div>
-                <div class="ex-body">Occurs when the selected pivot consistently partitions the array into highly unbalanced subproblems (e.g., size <code>0</code> and <code>n-1</code>). This occurs if the input array is already sorted (or reverse sorted) and the first or last element is chosen as the pivot. Avoided using a randomized pivot.</div>
-              </div>
             </div>
           `
         },
         {
-          title: "Algorithm Paradigms: Greedy vs DP",
+          title: "Optimization: Greedy vs Dynamic Programming",
           icon: "💡",
-          desc: "Solves optimization problems using Greedy (local choice) or Dynamic Programming (storing subproblem solutions).",
-          keyPoints: ["Greedy Choice", "Optimal Substructure", "Overlapping Subproblems", "0/1 Knapsack", "Dijkstra"],
+          desc: "Solving complex optimization problems using local greedy decisions or subproblem dynamic programming.",
+          keyPoints: ["Greedy Choice", "Optimal Substructure", "Overlapping Subproblems", "Memoization & Tabulation", "Knapsack Varieties"],
           htmlContent: `
             <div class="compare-grid">
               <div class="compare-card">
-                <h4 style="color:var(--accent5)">Greedy Paradigms</h4>
+                <h4 style="color:var(--accent5)">Greedy Strategy</h4>
                 <ul>
-                  <li>Makes the locally optimal choice at each step, hoping to find the global optimum.</li>
-                  <li>Fast but does not guarantee the optimal solution for all problems.</li>
-                  <li>Requires the <strong>Greedy Choice Property</strong>.</li>
-                  <li><strong>Examples:</strong> Fractional Knapsack, Huffman Coding, Kruskal/Prim MST, Dijkstra's Shortest Path.</li>
+                  <li>Chooses the locally optimal decision at each step.</li>
+                  <li>Fast execution but does not guarantee a global optimum for all problems.</li>
+                  <li><strong>Examples:</strong> Fractional Knapsack, Dijkstra's algorithm, Huffman Coding, Kruskal/Prim MST.</li>
                 </ul>
               </div>
               <div class="compare-card">
                 <h4 style="color:var(--accent6)">Dynamic Programming (DP)</h4>
                 <ul>
-                  <li>Solves problems by combining solutions to overlapping subproblems.</li>
-                  <li>Stores subproblem results in memory (Memoization or Tabulation) to avoid redundant calculations.</li>
-                  <li>Requires <strong>Optimal Substructure</strong> and <strong>Overlapping Subproblems</strong>.</li>
-                  <li><strong>Examples:</strong> 0/1 Knapsack, Longest Common Subsequence (LCS), Floyd-Warshall All-Pairs Shortest Path.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="compare-grid">
-              <div class="compare-card">
-                <h4 style="color:var(--accent2)">Fractional Knapsack (Greedy)</h4>
-                <ul>
-                  <li>Allows taking fractional parts of items.</li>
-                  <li>Sorted by cost/weight ratio (Value Density) and loaded greedily.</li>
-                  <li><strong>Complexity:</strong> <code>O(N log N)</code> due to initial sorting.</li>
-                </ul>
-              </div>
-              <div class="compare-card">
-                <h4 style="color:var(--accent6)">0/1 Knapsack (DP)</h4>
-                <ul>
-                  <li>Items cannot be split; you either take an item (1) or leave it (0).</li>
-                  <li>Greedy approach fails. Solved using a 2D table representing items vs remaining capacity.</li>
-                  <li><strong>Complexity:</strong> <code>O(N &times; W)</code> time and space.</li>
-                </ul>
-              </div>
-            </div>
-          `
-        },
-        {
-          title: "Advanced Graph Algorithms & P/NP",
-          icon: "🕸️",
-          desc: "Determines shortest paths across graphs. Explores computational complexity boundaries.",
-          keyPoints: ["Bellman-Ford", "Floyd-Warshall", "P vs NP", "NP-Complete", "NP-Hard"],
-          htmlContent: `
-            <div class="compare-grid">
-              <div class="compare-card">
-                <h4 style="color:var(--accent2)">Dijkstra vs Bellman-Ford</h4>
-                <ul>
-                  <li><strong>Dijkstra:</strong> Greedy shortest path algorithm. Does not support negative edge weights. Run time: <code>O((V + E) log V)</code> with min-heap.</li>
-                  <li><strong>Bellman-Ford:</strong> Dynamic Programming approach. <strong>Supports negative edge weights and detects negative cycles</strong>. Run time: <code>O(V &times; E)</code>.</li>
-                </ul>
-              </div>
-              <div class="compare-card">
-                <h4 style="color:var(--accent6)">Complexity Classes</h4>
-                <ul>
-                  <li><strong>P:</strong> Problems solvable in polynomial time (e.g., MST, Sorting).</li>
-                  <li><strong>NP:</strong> Problems whose solutions are verifiable in polynomial time (e.g., Sudoku, Integer Factorization).</li>
-                  <li><strong>NP-Complete:</strong> The hardest problems in NP. Any NP problem can be reduced to them in polynomial time. (e.g., TSP, 3-SAT, Vertex Cover).</li>
-                  <li><strong>NP-Hard:</strong> Problems at least as hard as NP-Complete. They do not need to be in NP (e.g., Halting Problem).</li>
+                  <li>Solves problems by storing solutions of overlapping subproblems to prevent duplicate work.</li>
+                  <li>Uses top-down (Memoization) or bottom-up (Tabulation) approaches.</li>
+                  <li><strong>Examples:</strong> 0/1 Knapsack, Floyd-Warshall shortest path, Longest Common Subsequence (LCS).</li>
                 </ul>
               </div>
             </div>
